@@ -25,11 +25,14 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
       backgroundColor: Colors.white,
             body: Container(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  _loginForm(responsive, context, height, width)
-                ],
+              height: height,
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    _loginForm(responsive, context, height, width)
+                  ],
+                ),
               ),
             ),
     );
@@ -39,11 +42,19 @@ class _LoginPageState extends State<LoginPage> {
 
     return Column(
       children: <Widget>[
+         SizedBox(height: responsive.ip(30)),
         _crearEmail(responsive),
         SizedBox(height: responsive.ip(5)),
         _crearPassword(responsive, height, width),
         SizedBox(height: responsive.ip(20)),
-        _crearBotonLogin(responsive, height, width),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            _crearBotonLogin(responsive, height, width),
+            SizedBox(height: responsive.ip(3)),
+            _irARegistro(responsive)
+          ],
+        )
       ],
     );
   }
@@ -89,7 +100,7 @@ class _LoginPageState extends State<LoginPage> {
         });
   }
 
-  Widget _crearPassword(Responsive responsive, double height, double width) {
+    Widget _crearPassword(Responsive responsive, double height, double width) {
     return StreamBuilder(
         stream: blocLogin.passwordStream,
         builder: (BuildContext context, AsyncSnapshot snapshot) {
@@ -143,7 +154,7 @@ class _LoginPageState extends State<LoginPage> {
         });
   }
 
-  Widget _crearBotonLogin(Responsive responsive, double height, double width) {
+    Widget _crearBotonLogin(Responsive responsive, double height, double width) {
     return Container(
       height: height * 0.08,
       margin: EdgeInsets.symmetric(
@@ -177,8 +188,22 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
+     Widget _irARegistro(Responsive responsive){
+      return Container(
+         margin: EdgeInsets.symmetric(horizontal: responsive.ip(5)),
+        child: Text(
+                  'Ir a registro',
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: responsive.ip(2),
+                    fontWeight: FontWeight.bold,
+                  ),
+                  textAlign: TextAlign.start,
+                )
+      );
+  }
 
-  _login(BuildContext context) async {
+    _login(BuildContext context) async {
 
     // preference.obtenerPreferencias();
     // showDialog(context: context, barrierColor: Colors.transparent, barrierDismissible: false, builder: (BuildContext context){return loading(context);});
