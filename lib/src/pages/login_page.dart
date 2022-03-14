@@ -26,8 +26,9 @@ class _LoginPageState extends State<LoginPage> {
       backgroundColor: Colors.white,
             body: Container(
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-
+                  _loginForm(responsive, context, height, width)
                 ],
               ),
             ),
@@ -39,9 +40,9 @@ class _LoginPageState extends State<LoginPage> {
     return Column(
       children: <Widget>[
         _crearEmail(responsive),
-        SizedBox(height: height * 0.03),
+        SizedBox(height: responsive.ip(5)),
         _crearPassword(responsive, height, width),
-        SizedBox(height: height * 0.03),
+        SizedBox(height: responsive.ip(20)),
         _crearBotonLogin(responsive, height, width),
       ],
     );
